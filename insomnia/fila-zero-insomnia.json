@@ -1,0 +1,623 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_source": "fila-zero",
+  "resources": [
+    {
+      "_id": "wrk_filazero",
+      "_type": "workspace",
+      "parentId": null,
+      "name": "Fila Zero API",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_filazero",
+      "name": "Base Environment",
+      "data": {}
+    },
+    {
+      "_id": "env_local",
+      "_type": "environment",
+      "parentId": "env_base",
+      "name": "Local",
+      "data": {
+        "base_url": "http://localhost:8080"
+      }
+    },
+    {
+      "_id": "env_render",
+      "_type": "environment",
+      "parentId": "env_base",
+      "name": "Render",
+      "data": {
+        "base_url": "https://COLE-AQUI-A-URL.onrender.com"
+      }
+    },
+    {
+      "_id": "fld_1",
+      "_type": "request_group",
+      "parentId": "wrk_filazero",
+      "name": "1. Unidades"
+    },
+    {
+      "_id": "req_1",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Listar unidades (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/unidades",
+      "metaSortKey": -999,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_2",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Buscar unidade 2 (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/unidades/2",
+      "metaSortKey": -998,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_3",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Buscar unidade inexistente (404)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/unidades/999",
+      "metaSortKey": -997,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_4",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Cadastrar unidade (201)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/unidades",
+      "metaSortKey": -996,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmUnidade\": \"Poupatempo Penha\",\n  \"dsEndereco\": \"Rua Doutor João Ribeiro, 304\",\n  \"nmBairro\": \"Penha\",\n  \"nmCidade\": \"São Paulo\",\n  \"guiches\": 3,\n  \"hrAbertura\": 8,\n  \"hrFechamento\": 17\n}"
+      }
+    },
+    {
+      "_id": "req_5",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Cadastrar unidade inválida (400)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/unidades",
+      "metaSortKey": -995,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmUnidade\": \"\",\n  \"dsEndereco\": \"Rua X\",\n  \"nmBairro\": \"Centro\",\n  \"nmCidade\": \"São Paulo\",\n  \"guiches\": 0,\n  \"hrAbertura\": 8,\n  \"hrFechamento\": 17\n}"
+      }
+    },
+    {
+      "_id": "req_6",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Atualizar unidade 4 (200)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/unidades/4",
+      "metaSortKey": -994,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmUnidade\": \"Poupatempo Lapa\",\n  \"dsEndereco\": \"Rua do Curtume, 90\",\n  \"nmBairro\": \"Lapa\",\n  \"nmCidade\": \"São Paulo\",\n  \"guiches\": 4,\n  \"hrAbertura\": 8,\n  \"hrFechamento\": 17\n}"
+      }
+    },
+    {
+      "_id": "req_7",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Remover unidade com agendamentos (409 - RN07)",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/unidades/1",
+      "metaSortKey": -993,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_8",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Agendamentos da unidade 1 (200 - rota 1:N)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/unidades/1/agendamentos",
+      "metaSortKey": -992,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_9",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Agendamentos da unidade 1 num dia (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/unidades/1/agendamentos?data=2026-11-19",
+      "metaSortKey": -991,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_10",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "Horários do dia com vagas (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/unidades/2/horarios?data=2026-12-10",
+      "metaSortKey": -990,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "fld_2",
+      "_type": "request_group",
+      "parentId": "wrk_filazero",
+      "name": "2. Serviços"
+    },
+    {
+      "_id": "req_11",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "Listar serviços (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/servicos",
+      "metaSortKey": -989,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_12",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "Buscar serviço 1 (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/servicos/1",
+      "metaSortKey": -988,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_13",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "Unidades que oferecem RG (200 - N:N)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/servicos/1/unidades",
+      "metaSortKey": -987,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_14",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "Unidades do Licenciamento (200 - lista vazia)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/servicos/6/unidades",
+      "metaSortKey": -986,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_15",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "Cadastrar serviço (201)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/servicos",
+      "metaSortKey": -985,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmServico\": \"Seguro-Desemprego\",\n  \"dsServico\": \"Solicitação do seguro-desemprego\",\n  \"dsDocumentos\": \"RG, CPF e Carteira de Trabalho\",\n  \"nrDuracaoMin\": 20\n}"
+      }
+    },
+    {
+      "_id": "req_16",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "Atualizar serviço 5 (200)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/servicos/5",
+      "metaSortKey": -984,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmServico\": \"Atestado de Antecedentes\",\n  \"dsServico\": \"Atestado de antecedentes criminais\",\n  \"dsDocumentos\": \"RG\",\n  \"nrDuracaoMin\": 15\n}"
+      }
+    },
+    {
+      "_id": "req_17",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "Remover serviço oferecido em unidades (409 - RN07)",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/servicos/1",
+      "metaSortKey": -983,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "fld_3",
+      "_type": "request_group",
+      "parentId": "wrk_filazero",
+      "name": "3. Cidadãos"
+    },
+    {
+      "_id": "req_18",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Listar cidadãos (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/cidadaos",
+      "metaSortKey": -982,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_19",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Buscar cidadão 1 (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/cidadaos/1",
+      "metaSortKey": -981,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_20",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Cadastrar cidadão (201)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/cidadaos",
+      "metaSortKey": -980,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmCidadao\": \"Rafaela Duarte\",\n  \"nrCpf\": \"33445566778\",\n  \"dsEmail\": \"rafaela.duarte@email.com\",\n  \"nrTelefone\": \"11987001122\",\n  \"dtNascimento\": \"1997-03-15\",\n  \"nmBairro\": \"Itaquera\"\n}"
+      }
+    },
+    {
+      "_id": "req_21",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Cadastrar cidadão inválido (400)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/cidadaos",
+      "metaSortKey": -979,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmCidadao\": \"Jo\",\n  \"nrCpf\": \"123\",\n  \"dsEmail\": \"email-errado\",\n  \"nrTelefone\": \"abc\",\n  \"dtNascimento\": \"2090-01-01\",\n  \"nmBairro\": \"\"\n}"
+      }
+    },
+    {
+      "_id": "req_22",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Cadastrar CPF repetido (409)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/cidadaos",
+      "metaSortKey": -978,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmCidadao\": \"Maria Souza\",\n  \"nrCpf\": \"12345678901\",\n  \"nrTelefone\": \"11987654321\",\n  \"dtNascimento\": \"1985-04-12\",\n  \"nmBairro\": \"Itaquera\"\n}"
+      }
+    },
+    {
+      "_id": "req_23",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Atualizar cidadão 6 (200)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/cidadaos/6",
+      "metaSortKey": -977,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nmCidadao\": \"Ricardo Alves\",\n  \"nrCpf\": \"67890123456\",\n  \"dsEmail\": \"ricardo.alves@email.com\",\n  \"nrTelefone\": \"11932109876\",\n  \"dtNascimento\": \"1960-02-09\",\n  \"nmBairro\": \"Penha\"\n}"
+      }
+    },
+    {
+      "_id": "req_24",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Agendamentos do cidadão 1 (200 - rota 1:N)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/cidadaos/1/agendamentos",
+      "metaSortKey": -976,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_25",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Agendar atendimento (201 - rota 1:N)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/cidadaos/4/agendamentos",
+      "metaSortKey": -975,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"cdUnidade\": 2,\n  \"cdServico\": 1,\n  \"dtAgendamento\": \"2026-12-10T10:00:00\"\n}"
+      }
+    },
+    {
+      "_id": "req_26",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Agendar serviço que a unidade não oferece (409 - RN02)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/cidadaos/4/agendamentos",
+      "metaSortKey": -974,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"cdUnidade\": 5,\n  \"cdServico\": 2,\n  \"dtAgendamento\": \"2026-12-10T10:00:00\"\n}"
+      }
+    },
+    {
+      "_id": "req_27",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Agendar fora do horário (409 - RN03)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/cidadaos/7/agendamentos",
+      "metaSortKey": -973,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"cdUnidade\": 2,\n  \"cdServico\": 1,\n  \"dtAgendamento\": \"2026-12-10T10:15:00\"\n}"
+      }
+    },
+    {
+      "_id": "req_28",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Agendar no passado (400)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/cidadaos/7/agendamentos",
+      "metaSortKey": -972,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"cdUnidade\": 2,\n  \"cdServico\": 1,\n  \"dtAgendamento\": \"2020-01-10T10:00:00\"\n}"
+      }
+    },
+    {
+      "_id": "req_29",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "Remover cidadão com agendamentos (409 - RN07)",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/cidadaos/1",
+      "metaSortKey": -971,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "fld_4",
+      "_type": "request_group",
+      "parentId": "wrk_filazero",
+      "name": "4. Agendamentos"
+    },
+    {
+      "_id": "req_30",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "Listar agendamentos (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/agendamentos",
+      "metaSortKey": -970,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_31",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "Buscar agendamento 11 (200)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/agendamentos/11",
+      "metaSortKey": -969,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_32",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "Confirmar agendamento 11 (200)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/agendamentos/11",
+      "metaSortKey": -968,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"CONFIRMADO\"\n}"
+      }
+    },
+    {
+      "_id": "req_33",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "Cancelar agendamento 15 (200)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/agendamentos/15",
+      "metaSortKey": -967,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"CANCELADO\"\n}"
+      }
+    },
+    {
+      "_id": "req_34",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "Alterar agendamento já atendido (409 - RN06)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/agendamentos/1",
+      "metaSortKey": -966,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"CONFIRMADO\"\n}"
+      }
+    },
+    {
+      "_id": "req_35",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "Status inexistente (400)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/agendamentos/14",
+      "metaSortKey": -965,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"SUMIU\"\n}"
+      }
+    },
+    {
+      "_id": "fld_5",
+      "_type": "request_group",
+      "parentId": "wrk_filazero",
+      "name": "5. Erros gerais"
+    },
+    {
+      "_id": "req_36",
+      "_type": "request",
+      "parentId": "fld_5",
+      "name": "Método não permitido (405)",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/unidades",
+      "metaSortKey": -964,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_37",
+      "_type": "request",
+      "parentId": "fld_5",
+      "name": "Rota inexistente (404)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/rota-que-nao-existe",
+      "metaSortKey": -963,
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_38",
+      "_type": "request",
+      "parentId": "fld_5",
+      "name": "Id com letra (400)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/unidades/abc",
+      "metaSortKey": -962,
+      "headers": [],
+      "body": {}
+    }
+  ]
+}
